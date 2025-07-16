@@ -153,8 +153,8 @@ export class ContactService {
     return {
       contact: {
         primaryContatctId: primaryContact.id,
-        emails: emails.filter((email): email is string => email !== null),
-        phoneNumbers: phoneNumbers.filter((phone): phone is string => phone !== null),
+        emails,
+        phoneNumbers,
         secondaryContactIds: secondaryContacts.map((c) => c.id),
       },
     }

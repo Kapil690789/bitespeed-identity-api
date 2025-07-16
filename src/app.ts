@@ -15,14 +15,14 @@ app.use(express.urlencoded({ extended: true }))
 
 app.use("/", contactRoutes)
 
-app.use((req, res) => {
+app.use((req: any, res: any) => {
   res.status(404).json({
     error: "Not found",
     message: `Route ${req.method} ${req.path} not found`,
   })
 })
 
-app.use((error: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
+app.use((error: Error, req: any, res: any, next: any) => {
   console.error("Unhandled error:", error)
   res.status(500).json({
     error: "Internal server error",

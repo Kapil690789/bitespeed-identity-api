@@ -5,7 +5,7 @@ export interface IdentifyRequest {
 
 export interface ContactResponse {
   contact: {
-    primaryContatctId: number // Note: keeping the typo as per requirements
+    primaryContatctId: number
     emails: string[]
     phoneNumbers: string[]
     secondaryContactIds: number[]

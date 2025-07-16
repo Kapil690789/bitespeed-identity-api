@@ -1,4 +1,3 @@
-import type { Request, Response } from "express"
 import { ContactService } from "../services/contactService"
 import { identifyRequestSchema } from "../validation/schemas"
 import { ZodError } from "zod"
@@ -10,7 +9,7 @@ export class ContactController {
     this.contactService = new ContactService()
   }
 
-  identify = async (req: Request, res: Response): Promise<void> => {
+  identify = async (req: any, res: any): Promise<void> => {
     try {
       const validatedData = identifyRequestSchema.parse(req.body)
       const result = await this.contactService.identifyContact(validatedData.email, validatedData.phoneNumber)
@@ -32,7 +31,7 @@ export class ContactController {
     }
   }
 
-  healthCheck = async (req: Request, res: Response): Promise<void> => {
+  healthCheck = async (req: any, res: any): Promise<void> => {
     res.status(200).json({
       status: "OK",
       timestamp: new Date().toISOString(),
