@@ -19,9 +19,9 @@
     "paths": {
       // If you still want to use @/ aliases locally, you can add them here,
       // but for deployment, relative paths are safer.
-      // "@/services/*": ["src/services/*"],
-      // "@/validation/*": ["src/validation/*"],
-      // "@/config/*": ["src/config/*"]
+      "@/services/*": ["src/services/*"],
+      "@/validation/*": ["src/validation/*"],
+      "@/config/*": ["src/config/*"]
     },
     "typeRoots": ["./node_modules/@types", "./src/types"] // Explicitly define where to find type definitions
   },
