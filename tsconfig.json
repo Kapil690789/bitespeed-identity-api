@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "ES2020",
     "module": "commonjs",
-    "lib": ["ES2020", "DOM", "ESNext.AsyncIterable", "ESNext.Promise", "DOM.Iterable", "Node"], // Explicitly include Node for process/console types
+    "lib": ["ES2020", "DOM"],
     "outDir": "./dist",
     "rootDir": "./src",
     "strict": true,
@@ -15,15 +15,9 @@
     "sourceMap": true,
     "removeComments": true,
     "moduleResolution": "node",
-    "baseUrl": ".", // This is important for resolving modules correctly
-    "paths": {
-      // If you still want to use @/ aliases locally, you can add them here,
-      // but for deployment, relative paths are safer.
-      "@/services/*": ["src/services/*"],
-      "@/validation/*": ["src/validation/*"],
-      "@/config/*": ["src/config/*"]
-    },
-    "typeRoots": ["./node_modules/@types", "./src/types"] // Explicitly define where to find type definitions
+    "baseUrl": ".",
+    "typeRoots": ["./node_modules/@types"],
+    "types": ["node", "express", "cors"]
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist", "**/*.test.ts"]
