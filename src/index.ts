@@ -58,3 +58,9 @@ process.on('unhandledRejection', (reason: any, promise: Promise<any>) => {
 })
 
 startServer()
+export default app
+
+// For local development
+if (process.env.NODE_ENV !== 'production') {
+  startServer()
+}
