@@ -8,17 +8,16 @@ datasource db {
 }
 
 model Contact {
-  id             Int              @id @default(autoincrement())
-  phoneNumber    String?          @map("phone_number") @db.VarChar(15)
-  email          String?          @db.VarChar(255)
-  linkedId       Int?             @map("linked_id")
-  linkPrecedence LinkPrecedence   @map("link_precedence")
-  createdAt      DateTime         @default(now()) @map("created_at")
-  updatedAt      DateTime         @updatedAt @map("updated_at")
-  deletedAt      DateTime?        @map("deleted_at")
-  
-  linkedContact  Contact?         @relation("ContactLink", fields: [linkedId], references: [id])
-  linkedContacts Contact[]        @relation("ContactLink")
+  id             Int            @id @default(autoincrement())
+  phoneNumber    String?        @map("phone_number") @db.VarChar(15)
+  email          String?        @db.VarChar(255)
+  linkedId       Int?           @map("linked_id")
+  linkPrecedence LinkPrecedence @map("link_precedence")
+  createdAt      DateTime       @default(now()) @map("created_at")
+  updatedAt      DateTime       @updatedAt @map("updated_at")
+  deletedAt      DateTime?      @map("deleted_at")
+  linkedContact  Contact?       @relation("ContactLink", fields: [linkedId], references: [id])
+  linkedContacts Contact[]      @relation("ContactLink")
 
   @@index([email])
   @@index([phoneNumber])

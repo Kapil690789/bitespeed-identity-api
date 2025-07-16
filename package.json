@@ -12,6 +12,7 @@
     "db:deploy": "prisma migrate deploy",
     "clean": "rm -rf dist"
   },
+  
   "keywords": ["identity", "reconciliation", "backend", "api"],
   "author": "Your Name",
   "license": "MIT",
