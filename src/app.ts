@@ -1,4 +1,4 @@
-import express from "express"
+import express, { Request, Response, NextFunction } from "express"
 import cors from "cors"
 import helmet from "helmet"
 import dotenv from "dotenv"
@@ -15,7 +15,7 @@ app.use(express.json({ limit: "10mb" }))
 app.use(express.urlencoded({ extended: true }))
 
 // Health check - CRITICAL for Render
-app.get('/health', (req, res) => {
+app.get('/health', (req: Request, res: Response) => {
   res.status(200).json({ 
     status: 'OK', 
     timestamp: new Date().toISOString(),
@@ -25,7 +25,7 @@ app.get('/health', (req, res) => {
 })
 
 // Root endpoint
-app.get('/', (req, res) => {
+app.get('/', (req: Request, res: Response) => {
   res.status(200).json({
     message: "Bitespeed Identity Reconciliation API",
     version: "1.0.0",
@@ -37,7 +37,7 @@ app.get('/', (req, res) => {
 app.use("/", contactRoutes)
 
 // 404 handler
-app.use((req: any, res: any) => {
+app.use((req: Request, res: Response) => {
   res.status(404).json({
     error: "Not found",
     message: `Route ${req.method} ${req.path} not found`,
@@ -45,7 +45,7 @@ app.use((req: any, res: any) => {
 })
 
 // Error handler
-app.use((error: Error, req: any, res: any, next: any) => {
+app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
   console.error("Unhandled error:", error)
   res.status(500).json({
     error: "Internal server error",
