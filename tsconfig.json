@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "ES2020",
     "module": "commonjs",
-    "lib": ["ES2020", "DOM"], // Added DOM for console and other global browser APIs
+    "lib": ["ES2020", "DOM"], // Keep DOM for console and other global browser APIs
     "outDir": "./dist",
     "rootDir": "./src",
     "strict": true,
@@ -14,8 +14,8 @@
     "declarationMap": true,
     "sourceMap": true,
     "removeComments": true,
-    "moduleResolution": "node",
-    "types": ["node", "express", "cors", "jest"] // Explicitly include all necessary @types packages
+    "moduleResolution": "node"
+    // Removed "types": ["node", "express", "cors", "jest"]
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist", "**/*.test.ts"]
