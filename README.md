@@ -52,7 +52,7 @@ npm install -D nodemon ts-node jest @types/jest supertest @types/supertest ts-je
 cp .env.example .env
 
 # Edit .env with your database URL
-# ONLY FOR LOCAL DEV USE THIS URL 
+# ONLY FOR LOCAL DEV USE THIS URL and FOR PROD. USE ANTHER ONE 
 
 DATABASE_URL="postgresql://postgres:[YOUR-PASSWORD]@db.cufcfyqjnkytksxavtmz.supabase.co:5432/postgres"
 PORT=3000
