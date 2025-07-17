@@ -52,6 +52,8 @@ npm install -D nodemon ts-node jest @types/jest supertest @types/supertest ts-je
 cp .env.example .env
 
 # Edit .env with your database URL
+# ONLY FOR LOCAL DEV USE THIS URL 
+
 DATABASE_URL="postgresql://postgres:[YOUR-PASSWORD]@db.cufcfyqjnkytksxavtmz.supabase.co:5432/postgres"
 PORT=3000
 NODE_ENV=development
