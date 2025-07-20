@@ -32,15 +32,23 @@
             color: var(--bitespeed-text);
             transition: background-color 0.3s ease, color 0.3s ease;
         }
-        .card {
+        .card, .card-title {
             background-color: var(--bitespeed-surface);
             border-color: var(--bitespeed-border);
+            color: var(--bitespeed-text) !important; /* Fix: Make card titles visible */
             transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        .form-label {
+             color: var(--bitespeed-text) !important; /* Fix: Make form labels visible */
         }
         .form-control {
             background-color: var(--bitespeed-bg);
             border-color: var(--bitespeed-border);
-            color: var(--bitespeed-text);
+            color: var(--bitespeed-text) !important; /* Fix: Ensure text is visible */
+        }
+        .form-control::placeholder {
+            color: var(--bitespeed-text-secondary); /* Fix: Style placeholder */
+            opacity: 1;
         }
         .form-control:focus {
             background-color: var(--bitespeed-bg);
