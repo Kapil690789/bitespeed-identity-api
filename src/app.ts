@@ -1,56 +1,58 @@
-import express, { Request, Response, NextFunction } from "express"
-import cors from "cors"
-import helmet from "helmet"
-import dotenv from "dotenv"
-import contactRoutes from "./routes/contactRoutes"
+import express, { Request, Response, NextFunction } from "express";
+import cors from "cors";
+import helmet from "helmet";
+import dotenv from "dotenv";
+import contactRoutes from "./routes/contactRoutes";
+import path from "path";
 
-dotenv.config()
+dotenv.config();
 
-const app = express()
+const app = express();
 
-// Middleware
-app.use(helmet())
-app.use(cors())
-app.use(express.json({ limit: "10mb" }))
-app.use(express.urlencoded({ extended: true }))
+// --- Middleware ---
 
-// Health check - CRITICAL for Render
-app.get('/health', (req: Request, res: Response) => {
-  res.status(200).json({ 
-    status: 'OK', 
-    timestamp: new Date().toISOString(),
-    environment: process.env.NODE_ENV,
-    port: process.env.PORT || 3000
+// THIS IS THE FIX: Configure Helmet's Content Security Policy
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+      "script-src": ["'self'", "https://cdn.tailwindcss.com"], // Allows scripts from our server and the Tailwind CDN
+      "style-src": ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"], // Allows inline styles and fonts
+      "font-src": ["'self'", "https://fonts.gstatic.com"],
+    },
   })
-})
+);
 
-// Root endpoint
-app.get('/', (req: Request, res: Response) => {
-  res.status(200).json({
-    message: "Bitespeed Identity Reconciliation API",
-    version: "1.0.0",
-    status: "running"
-  })
-})
+app.use(cors());
+app.use(express.json({ limit: "10mb" }));
+app.use(express.urlencoded({ extended: true }));
 
-// API routes
-app.use("/", contactRoutes)
+// --- Serve Static UI ---
+// This serves your index.html and script.js files.
+app.use(express.static(path.join(__dirname, 'public')));
 
-// 404 handler
-app.use((req: Request, res: Response) => {
-  res.status(404).json({
-    error: "Not found",
-    message: `Route ${req.method} ${req.path} not found`,
-  })
-})
+// --- API Routes ---
+app.use("/", contactRoutes);
 
-// Error handler
+// --- Error Handling ---
+app.use((req: Request, res: Response, next: NextFunction) => {
+  if (!res.headersSent) {
+    res.status(404).json({
+      error: "Not Found",
+      message: `API endpoint not found: ${req.method} ${req.path}`,
+    });
+  }
+});
+
 app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
-  console.error("Unhandled error:", error)
+  console.error("Unhandled Error:", error);
+  if (res.headersSent) {
+    return next(error);
+  }
   res.status(500).json({
-    error: "Internal server error",
-    message: process.env.NODE_ENV === "development" ? error.message : "Something went wrong",
-  })
-})
+    error: "Internal Server Error",
+    message: process.env.NODE_ENV === "development" ? error.message : "An unexpected error occurred.",
+  });
+});
 
-export default app
+export default app;
