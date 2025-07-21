@@ -2,37 +2,22 @@
   "version": 2,
   "builds": [
     {
-      "src": "public/**/*",
-      "use": "@vercel/static"
+      "src": "index.js",
+      "use": "@vercel/node"
     },
     {
-      "src": "dist/index.js",
-      "use": "@vercel/node"
+      "src": "public/**/*",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
     {
-      "src": "/identify",
-      "dest": "/dist/index.js"
-    },
-    {
-      "src": "/health",
-      "dest": "/dist/index.js"
-    },
-    {
-      "src": "/contacts",
-      "dest": "/dist/index.js"
-    },
-    {
-      "src": "/contact/(.*)",
-      "dest": "/dist/index.js"
+      "src": "/(identify|health|contacts|contact/.*)",
+      "dest": "/index.js"
     },
     {
       "src": "/(.*)",
       "dest": "/public/$1"
     }
-  ],
-  "env": {
-    "DATABASE_URL": "@database_url"
-  }
+  ]
 }
