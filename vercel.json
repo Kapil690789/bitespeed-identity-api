@@ -12,12 +12,27 @@
   ],
   "routes": [
     {
-      "src": "/(identify|health)",
+      "src": "/identify",
+      "dest": "/dist/index.js"
+    },
+    {
+      "src": "/health",
+      "dest": "/dist/index.js"
+    },
+    {
+      "src": "/contacts",
+      "dest": "/dist/index.js"
+    },
+    {
+      "src": "/contact/(.*)",
       "dest": "/dist/index.js"
     },
     {
       "src": "/(.*)",
       "dest": "/public/$1"
     }
-  ]
+  ],
+  "env": {
+    "DATABASE_URL": "@database_url"
+  }
 }

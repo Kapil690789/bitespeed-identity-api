@@ -10,7 +10,8 @@
     "test": "jest",
     "postinstall": "prisma generate",
     "db:deploy": "prisma migrate deploy",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist",
+    "vercel-build": "npm run build && prisma generate && prisma migrate deploy"
   },
   "keywords": ["identity", "reconciliation", "backend", "api"],
   "author": "Kapil Sharma",
